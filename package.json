@@ -1,0 +1,29 @@
+{
+  "name": "contenful-graph-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development node src/server.js",
+    "build": "next build",
+    "start": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "Yaraslau Kurmyza <lotask@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "contentful-graph": "^1.1.2",
+    "express": "^4.15.4",
+    "jss": "^8.1.0",
+    "jss-preset-default": "^3.0.0",
+    "material-ui": "^1.0.0-beta.8",
+    "material-ui-icons": "^1.0.0-beta.5",
+    "next": "^3.2.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-jss": "^7.1.0",
+    "react-tap-event-plugin": "^2.0.1",
+    "recompose": "^0.25.0"
+  }
+}
