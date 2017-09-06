@@ -31,11 +31,12 @@ const renderHandler = async (req, res) => {
   const fileName = `${spaceId}-${Date.now()}`
 
   if (dotStr && dotStr.length > 1) {
-    await Promise.all([
-      generateGraph(outFile(fileName, 'png'), dotStr, 'png'),
-      generateGraph(outFile(fileName, 'svg'), dotStr, 'svg'),
-      generateGraph(outFile(fileName, 'pdf'), dotStr, 'pdf')
-    ])
+    // wait for the png
+    await generateGraph(outFile(fileName, 'png'), dotStr, 'png')
+
+    // but those are fine to be finished later
+    setImmediate(() => generateGraph(outFile(fileName, 'svg'), dotStr, 'svg'))
+    setImmediate(() => generateGraph(outFile(fileName, 'pdf'), dotStr, 'pdf'))
   }
 
   res.json({
