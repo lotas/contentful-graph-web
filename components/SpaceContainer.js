@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from 'material-ui/styles';
 
+import JSONTree from 'react-json-tree'
+
+
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
@@ -97,6 +100,34 @@ class SpaceContainer extends React.Component {
     </Paper>
   }
 
+  renderRaw() {
+    const { data } = this.props
+    return <Paper className={this.props.classes.root} elevation={3}>
+      <JSONTree
+        data={data && data.modelsMap}
+        hideRoot={true}
+        theme={{
+          base00: '#272822',
+          base01: '#383830',
+          base02: '#49483e',
+          base03: '#75715e',
+          base04: '#a59f85',
+          base05: '#f8f8f2',
+          base06: '#f5f4f1',
+          base07: '#f9f8f5',
+          base08: '#f92672',
+          base09: '#fd971f',
+          base0A: '#f4bf75',
+          base0B: '#a6e22e',
+          base0C: '#a1efe4',
+          base0D: '#66d9ef',
+          base0E: '#ae81ff',
+          base0F: '#cc6633'
+        }}
+      />
+    </Paper>
+  }
+
   render() {
     const { value } = this.state
     const { classes, spaceId, data } = this.props
@@ -138,10 +169,12 @@ class SpaceContainer extends React.Component {
           <Tab label="Image" />
           <Tab label="Dot Graph" />
           <Tab label={renderBadge()} />
+          <Tab label="Raw models" />
         </Tabs>
         {value === 0 && <TabContainer>{this.renderImage()}</TabContainer>}
         {value === 1 && <TabContainer>{this.renderDotGraph()}</TabContainer>}
         {value === 2 && <TabContainer>{this.renderModels()}</TabContainer>}
+        {value === 3 && <TabContainer>{this.renderRaw()}</TabContainer>}
       </div>
     );
   }
