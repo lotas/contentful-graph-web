@@ -28,6 +28,7 @@ app.prepare()
 
     server.use(bodyParser.json())
     server.use(express.static('static'))
+    server.use(express.static('node_modules/react-viewer'))
 
     server.post('/render', renderHandler)
 

@@ -5,7 +5,6 @@ import { withStyles } from 'material-ui/styles';
 
 import JSONTree from 'react-json-tree'
 
-
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
@@ -25,6 +24,7 @@ import ExpandMore from 'material-ui-icons/ExpandMore';
 
 
 import ModelList from './ModelList'
+import ImageViewer from './ImageViewer'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -95,8 +95,7 @@ class SpaceContainer extends React.Component {
     const { rendered } = data
 
     return <Paper className={classes.root} elevation={3}>
-      <img src={rendered.png} style={{ width: '100%' }} />
-
+      <ImageViewer img={rendered.png} />
     </Paper>
   }
 

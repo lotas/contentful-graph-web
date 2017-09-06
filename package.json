@@ -25,6 +25,7 @@
     "react-json-tree": "^0.10.9",
     "react-jss": "^7.1.0",
     "react-tap-event-plugin": "^2.0.1",
+    "react-viewer": "^2.2.6",
     "recompose": "^0.25.0"
   }
 }
