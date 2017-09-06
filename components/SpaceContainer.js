@@ -25,6 +25,7 @@ import ExpandMore from 'material-ui-icons/ExpandMore';
 
 import ModelList from './ModelList'
 import ImageViewer from './ImageViewer'
+import InteractiveViewer from './InteractiveViewer'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -84,6 +85,13 @@ class SpaceContainer extends React.Component {
     const { data } = this.props
     return <Paper className={this.props.classes.root} elevation={4}>
       <ModelList models={data && data.modelsMap} />
+    </Paper>
+  }
+
+  renderInteractive() {
+    const { data, devMode, hideFields } = this.props
+    return <Paper className={this.props.classes.root} elevation={4}>
+      <InteractiveViewer models={data && data.modelsMap} devMode={devMode} hideFields={hideFields} />
     </Paper>
   }
 
@@ -166,14 +174,18 @@ class SpaceContainer extends React.Component {
         </Paper>
         <Tabs value={value} onChange={this.handleChange}>
           <Tab label="Image" />
+          <Tab label="Interactive" />
           <Tab label="Dot Graph" />
           <Tab label={renderBadge()} />
           <Tab label="Raw models" />
         </Tabs>
-        {value === 0 && <TabContainer>{this.renderImage()}</TabContainer>}
-        {value === 1 && <TabContainer>{this.renderDotGraph()}</TabContainer>}
-        {value === 2 && <TabContainer>{this.renderModels()}</TabContainer>}
-        {value === 3 && <TabContainer>{this.renderRaw()}</TabContainer>}
+        <TabContainer>
+        {value === 0 && this.renderImage()}
+        {value === 1 && this.renderInteractive()}
+        {value === 2 && this.renderDotGraph()}
+        {value === 3 && this.renderModels()}
+        {value === 4 && this.renderRaw()}
+        </TabContainer>
       </div>
     );
   }
@@ -182,6 +194,8 @@ class SpaceContainer extends React.Component {
 SpaceContainer.propTypes = {
   classes: PropTypes.object.isRequired,
   spaceId: PropTypes.string,
-  data: PropTypes.object
+  data: PropTypes.object,
+  devMode: PropTypes.bool,
+  hideFields: PropTypes.bool
 };
 export default withStyles(styles)(SpaceContainer);

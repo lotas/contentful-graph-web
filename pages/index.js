@@ -101,7 +101,10 @@ class Index extends Component {
       open: false,
     }, () => {
       serializeToStorage(this.state)
-      this.handleRender()
+
+      if (this.state.data === null) {
+        this.handleRender()
+      }
     })
   }
 
@@ -231,7 +234,7 @@ class Index extends Component {
 
   render() {
     const { classes } = this.props
-    const { rendering, data, spaceId } = this.state
+    const { rendering, data, spaceId, devMode, hideFields } = this.state
 
     return (
       <div className={classes.root}>
@@ -240,7 +243,7 @@ class Index extends Component {
           {this.renderDialog()}
           {!this.hasCredentials && this.renderBlankScreen()}
           {rendering && <LinearProgress />}
-          {spaceId && <SpaceContainer spaceId={spaceId} data={data} />}
+          {spaceId && <SpaceContainer spaceId={spaceId} data={data} devMode={devMode} hideFields={hideFields} />}
         </div>
       </div>
     );

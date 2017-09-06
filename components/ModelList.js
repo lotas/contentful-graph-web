@@ -106,7 +106,6 @@ class ModelList extends React.Component {
           className={this.props.classes.input}
           value={this.state._filter}
           onChange={event => this.setState({ _filter: event.target.value })}
-          margin="normal"
         />
       </Grid>
       <Divider />
