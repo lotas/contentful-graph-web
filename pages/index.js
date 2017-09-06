@@ -32,7 +32,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import Switch from 'material-ui/Switch';
 
-import { serializeToStorage, deserializeFromStorage } from '../src/storage'
+import { serializeToStorage, deserializeFromStorage, getData, setData } from '../src/storage'
 import SpaceContainer from '../components/SpaceContainer'
 
 const styles = {
@@ -71,29 +71,30 @@ const styles = {
 };
 
 
-
 class Index extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = Object.assign({
-      open: false,
-      rendering: false,
-      spaceId: '',
-      mgmtToken: '',
-      dlvrToken: '',
-      devMode: false,
-      hideFields: false,
-      data: null
-    }, deserializeFromStorage())
+        open: false,
+        rendering: false,
+        spaceId: '',
+        mgmtToken: '',
+        dlvrToken: '',
+        devMode: false,
+        hideFields: false,
+        data: null
+      },
+      deserializeFromStorage(),
+      { data: getData() }
+    )
   }
 
   get hasCredentials() {
     const { spaceId, dlvrToken, mgmtToken } = this.state
     return spaceId && (dlvrToken || mgmtToken)
   }
-
 
   handleRequestClose = () => {
     this.setState({
@@ -130,6 +131,7 @@ class Index extends Component {
           rendering: false,
           data
         })
+        setData(data)
       })
       .catch(err => {
         this.setState({
