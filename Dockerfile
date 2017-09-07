@@ -5,13 +5,12 @@ RUN apk add --update graphviz font-bitstream-type1 ghostscript-fonts git && \
 
 
 ADD package.json /tmp/package.json
-RUN cd /tmp && npm install
-RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+RUN cd /tmp && npm install && mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 
 WORKDIR /opt/app
 ADD . /opt/app
 
-RUN mkdir -p /opt/app/static/graphs
+RUN mkdir -p /opt/app/static/graphs && chmod 0777 /opt/app/static/graphs
 
 RUN npm run build
 
