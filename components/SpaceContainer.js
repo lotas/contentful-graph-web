@@ -151,7 +151,7 @@ class SpaceContainer extends React.Component {
     return (
       <div>
         <Paper className={classes.root} elevation={4}>
-          <Grid container spacing={16}>
+          <Grid container spacing={6}>
             <Grid item xs={6}>
               <Typography type="headline" component="h3" style={{ lineHeight: 2 }}>
                 SpaceId: <u>{spaceId}</u>
