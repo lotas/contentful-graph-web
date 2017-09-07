@@ -12,6 +12,8 @@ import Dialog, {
   DialogActions,
 } from 'material-ui/Dialog';
 
+import Grid from 'material-ui/Grid';
+
 import Typography from 'material-ui/Typography';
 import withStyles from 'material-ui/styles/withStyles';
 import withRoot from '../components/withRoot';
@@ -31,6 +33,8 @@ import { LinearProgress } from 'material-ui/Progress';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import Switch from 'material-ui/Switch';
+import grey from 'material-ui/colors/blueGrey';
+
 
 import { serializeToStorage, deserializeFromStorage, getData, setData } from '../src/storage'
 import SpaceContainer from '../components/SpaceContainer'
@@ -67,6 +71,19 @@ const styles = {
   paper: {
     border: '1px solid red',
     padding: 16
+  },
+
+  footer: {
+    margin: '50px 35px 10px 30px',
+    color: grey[600],
+    fontSize: 13,
+    fontFamily: 'monospace',
+    paddingTop: 10,
+    borderTop: '1px solid #ccc'
+  },
+
+  a: {
+    marginRight: 10
   }
 };
 
@@ -244,6 +261,17 @@ class Index extends Component {
           {!this.hasCredentials && this.renderBlankScreen()}
           {rendering && <LinearProgress />}
           {spaceId && <SpaceContainer spaceId={spaceId} data={data} devMode={devMode} hideFields={hideFields} />}
+        </div>
+        <div className={classes.footer}>
+          <Grid container align="center" justify="space-between">
+            <Grid item>
+              Library: <a className={classes.a} href="https://github.com/lotas/contentful-graph">contentful-graph</a>
+              Web version: <a className={classes.a} href="https://github.com/lotas/contentful-graph-web">contentful-graph-web</a>
+            </Grid>
+            <Grid item>
+              By <a href="https://github.com/lotas">Yaraslau Kurmyza</a>
+            </Grid>
+          </Grid>
         </div>
       </div>
     );
