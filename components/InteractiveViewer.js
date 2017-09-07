@@ -53,7 +53,7 @@ const getNodesAndEdges = (data, devMode = false, hideFields = false, auto = fals
     return {
       id: model,
       font: { multi: true },
-      label: `<b>${model}</b>\n${!hideFields && data[model].fields.map(f => devMode ? f.id : f.name).join('\n')}`,
+      label: `<b>${model}</b>\n${hideFields ? '' : data[model].fields.map(f => devMode ? f.id : f.name).join('\n')}`,
       fixed: {
         x: false,
         y: false
