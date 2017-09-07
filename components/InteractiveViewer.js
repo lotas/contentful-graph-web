@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Graph from 'react-graph-vis';
 
+import { FormControlLabel } from 'material-ui/Form';
+import Switch from 'material-ui/Switch';
 
 const getWidth = () => {
   if (typeof document !== 'undefined') {
@@ -10,7 +12,7 @@ const getWidth = () => {
   return '100%'
 }
 
-const getNodesAndEdges = (data, devMode = false, hideFields = false) => {
+const getNodesAndEdges = (data, devMode = false, hideFields = false, auto = false) => {
   const models = Object.keys(data)
   const len = models.length
   const cols = Math.ceil(Math.sqrt(len))
@@ -56,52 +58,38 @@ const getNodesAndEdges = (data, devMode = false, hideFields = false) => {
         x: false,
         y: false
       },
-      x: x * 200,
-      y: y * 200,
+      x: auto ? null : x * 200,
+      y: auto ? null : y * 200,
       group: linksCount > 0 ? y : 'nolinks'
     }
   })
 
   return { nodes, edges }
-
-  // [
-  //   { id: 1, label: 'This is a\nsingle-font label'},
-  //   { id: 2, font: { multi: true }, label: '<b>This</b> is a\n<i>default</i> <b><i>multi-</i>font</b> <code>label</code>'},
-  //   { id: 3, font: { multi: 'html', size: 20 }, label: '<b>This</b> is an\n<i>html</i> <b><i>multi-</i>font</b> <code>label</code>'},
-  //   { id: 4, font: { multi: 'md', face: 'georgia' }, label: '*This* is a\n_markdown_ *_multi-_ font* `label`'},
-  // ]
-  // edges:
-  // [
-  //   {from: 1, to: 2, label: "single to default"},
-  //   {from: 2, to: 3, font: { multi: true }, label: "default to <b>html</b>" },
-  //   {from: 3, to: 4, font: { multi: "md" }, label: "*html* to _md_" }
-  // ]
 }
 
 class InteractiveViewer extends React.Component {
   state = {
-    visible: false
+    visible: false,
+    auto: false
   };
 
   render() {
     const { models, devMode, hideFields } = this.props
+    const { auto } = this.state
 
     if (!models) {
       return null
     }
 
-    const graph = getNodesAndEdges(models, devMode, hideFields)
+    const graph = getNodesAndEdges(models, devMode, hideFields, auto)
 
     const options = {
       layout: {
         randomSeed: 50,
-        improvedLayout: true,
+        improvedLayout: auto,
         hierarchical: {
-          enabled: false,
-          direction: 'Up-Down',
-          nodeSpacing: 300,
-          treeSpacing: 300,
-          levelSeparation: 300
+          enabled: auto,
+          direction: 'Up-Down'
         }
       },
       edges: {
@@ -116,6 +104,12 @@ class InteractiveViewer extends React.Component {
       width: getWidth()
     };
 
+    if (auto === false) {
+      options.layout.hierarchical.nodeSpacing = 300
+      options.layout.hierarchical.treeSpacing = 300
+      options.layout.hierarchical.levelSeparation = 300
+    }
+
     const events = {
       select: function (event) {
         const { nodes, edges } = event;
@@ -123,6 +117,15 @@ class InteractiveViewer extends React.Component {
     }
 
     return <div style={{ width: '100%' }}>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={this.state.auto}
+            onChange={(event, checked) => this.setState({ auto: checked })}
+          />
+        }
+        label="Auto layout"
+          />
       <Graph graph={graph} options={options} events={events} />
     </div>
 
