@@ -1,9 +1,12 @@
 CONTAINER_NAME:= lotas/contentful-graph-web
 PORT:= 3000
 
-BUILD:
+build:
 	docker build -t $(CONTAINER_NAME) .
 
-RUN:
-	docker run -it --rm -p $(PORT):3000 lotas/contentful-graph-web
+run:
+	docker run -it --rm -p $(PORT):3000 $(CONTAINER_NAME)
+
+push:
+	docker push $(CONTAINER_NAME)
 

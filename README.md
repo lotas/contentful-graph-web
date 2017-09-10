@@ -11,7 +11,7 @@ docker run -it --rm -p 3000:3000 lotas/contentful-graph-web
 
 # or
 
-make RUN
+make run
 ```
 
 # Demo
