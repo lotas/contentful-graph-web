@@ -1,35 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import Badge from 'material-ui/Badge';
-import Input from 'material-ui/Input/Input';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
+import Input from '@material-ui/core/Input/Input';
 
-import DownloadIcon from 'material-ui-icons/FileDownload';
-import PictureAsPdfIcon from 'material-ui-icons/PictureAsPdf';
+import DownloadIcon from '@material-ui/icons/CloudDownload';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Divider from 'material-ui/Divider';
-import Grid from 'material-ui/Grid';
-import TextField from 'material-ui/TextField';
-import { FormControlLabel } from 'material-ui/Form';
-import Switch from 'material-ui/Switch';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
-import Collapse from 'material-ui/transitions/Collapse';
-import ExpandLess from 'material-ui-icons/ExpandLess';
-import ExpandMore from 'material-ui-icons/ExpandMore';
-import OneIcon from 'material-ui-icons/LooksOne';
-import ManyIcon from 'material-ui-icons/AllInclusive';
-import LinkIcon from 'material-ui-icons/Link';
-import NoLinkIcon from 'material-ui-icons/Stop';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
-import blue from 'material-ui/colors/blue';
-import grey from 'material-ui/colors/blueGrey';
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import OneIcon from '@material-ui/icons/LooksOne';
+import ManyIcon from '@material-ui/icons/AllInclusive';
+import LinkIcon from '@material-ui/icons/Link';
+import NoLinkIcon from '@material-ui/icons/Stop';
+
+import blue from '@material-ui/core/colors/blue';
+import grey from '@material-ui/core/colors/blueGrey';
 
 
 const styles = theme => ({
@@ -150,7 +156,7 @@ class ModelList extends React.Component {
               <ListItemText primary={model} secondary={links}></ListItemText>
               {this.state[model] ? <ExpandMore /> : <ExpandLess />}
             </ListItem> ,
-            <Collapse in={this.state[model]} transitionDuration="auto" unmountOnExit>
+            <Collapse in={this.state[model]} unmountOnExit>
               {Object.keys(models[model].relations.one).map(fld => <ListItem key={fld} className={classes.nested}>
                 <ListItemIcon>
                   <OneIcon />

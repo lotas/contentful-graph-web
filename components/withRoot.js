@@ -1,7 +1,7 @@
 /* eslint-disable flowtype/require-valid-file-annotation */
 
 import React, { Component } from 'react';
-import { withStyles, MuiThemeProvider } from 'material-ui/styles';
+import { withStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import wrapDisplayName from 'recompose/wrapDisplayName';
 import getContext from '../styles/getContext';
 

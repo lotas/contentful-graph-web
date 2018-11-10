@@ -1,27 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import JSONTree from 'react-json-tree'
 
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import Badge from 'material-ui/Badge';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
 
-import DownloadIcon from 'material-ui-icons/FileDownload';
-import PictureAsPdfIcon from 'material-ui-icons/PictureAsPdf';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Divider from 'material-ui/Divider';
-import Grid from 'material-ui/Grid';
-import TextField from 'material-ui/TextField';
-import Collapse from 'material-ui/transitions/Collapse';
-import ExpandLess from 'material-ui-icons/ExpandLess';
-import ExpandMore from 'material-ui-icons/ExpandMore';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Collapse from '@material-ui/core/Collapse';
+
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import DownloadIcon from '@material-ui/icons/CloudDownload';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
 import ModelList from './ModelList'
 import ImageViewer from './ImageViewer'
@@ -66,19 +71,21 @@ class SpaceContainer extends React.Component {
       return null
     }
 
-    return <Paper className={this.props.classes.root} elevation={4}>
-      <Typography type="headline" component="h3">
-        Graphviz dot representation
-    </Typography>
-      <TextField
-        id="multiline-flexible"
-        multiline
-        rowsMax="100"
-        value={data.dot}
-        margin="normal"
-        style={{ width: '100%' }}
-      />
-    </Paper>
+    return (
+      <Paper className={this.props.classes.root} elevation={4}>
+        <Typography type="headline" component="h3">
+          Graphviz dot representation
+      </Typography>
+        <TextField
+          id="multiline-flexible"
+          multiline
+          rowsMax="100"
+          value={data.dot}
+          margin="normal"
+          style={{ width: '100%' }}
+        />
+      </Paper>
+    )
   }
 
   renderModels() {
@@ -151,7 +158,7 @@ class SpaceContainer extends React.Component {
     return (
       <div>
         <Paper className={classes.root} elevation={4}>
-          <Grid container spacing={6}>
+          <Grid container spacing={8}>
             <Grid item xs={6}>
               <Typography type="headline" component="h3" style={{ lineHeight: 2 }}>
                 SpaceId: <u>{spaceId}</u>

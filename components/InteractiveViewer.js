@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Graph from 'react-graph-vis';
 
-import { FormControlLabel } from 'material-ui/Form';
-import Switch from 'material-ui/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const getWidth = () => {
   if (typeof document !== 'undefined') {
@@ -89,7 +89,7 @@ class InteractiveViewer extends React.Component {
         improvedLayout: auto,
         hierarchical: {
           enabled: auto,
-          direction: 'Up-Down'
+          direction: 'UD'
         }
       },
       edges: {
@@ -132,7 +132,7 @@ class InteractiveViewer extends React.Component {
   }
 }
 
-InteractiveViewer.PropTypes = {
+InteractiveViewer.propTypes = {
   models: PropTypes.object,
   devMode: PropTypes.bool,
   hideFields: PropTypes.bool

@@ -3,37 +3,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
-import Dialog, {
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-} from 'material-ui/Dialog';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Grid from 'material-ui/Grid';
+import Grid from '@material-ui/core/Grid';
 
-import Typography from 'material-ui/Typography';
-import withStyles from 'material-ui/styles/withStyles';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import withRoot from '../components/withRoot';
 
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
 
-import MenuIcon from 'material-ui-icons/Menu';
-import SettingsIcon from 'material-ui-icons/Settings';
-import CloudDownloadIcon from 'material-ui-icons/CloudDownload';
-import ImportExportIcon from 'material-ui-icons/ImportExport';
-import RefreshIcon from 'material-ui-icons/Refresh';
+import MenuIcon from '@material-ui/icons/Menu';
+import SettingsIcon from '@material-ui/icons/Settings';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import ImportExportIcon from '@material-ui/icons/ImportExport';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
-import { Input, FormControl, FormGroup, FormControlLabel } from 'material-ui'
-import { LinearProgress } from 'material-ui/Progress';
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import Switch from 'material-ui/Switch';
-import grey from 'material-ui/colors/blueGrey';
+import { Input, FormControl, FormGroup, FormControlLabel } from '@material-ui/core'
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Switch from '@material-ui/core/Switch';
+import grey from '@material-ui/core/colors/blueGrey';
 
 
 import { serializeToStorage, deserializeFromStorage, getData, setData } from '../src/storage'
@@ -48,7 +47,9 @@ const styles = {
     flex: 1,
   },
   appBar: {
-    textIndent: 30
+    textIndent: 30,
+    marginRight: 20,
+    paddingRight: 20
   },
   menuButton: {
     marginLeft: 12,
@@ -59,6 +60,10 @@ const styles = {
   },
   formGroup: {
     marginBottom: 16
+  },
+
+  button: {
+    marginRight: 8,
   },
 
   spaceId: {
@@ -175,43 +180,45 @@ class Index extends Component {
     const { classes } = this.props
     const { spaceId, dlvrToken, mgmtToken } = this.state
 
-    return <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-    <DialogTitle>Contentful auth tokens</DialogTitle>
-    <DialogContent>
-      <DialogContentText>
-        <FormGroup className={classes.formGroup}>
-          <TextField label="spaceId" margin="normal" placeholder="SpaceId" value={spaceId} onChange={(e) => this.changeValue('spaceId', e)} />
-        </FormGroup>
-        <FormGroup className={classes.formGroup}>
-          <TextField label="Delivery token" margin="normal" placeholder="Delivery Token" value={dlvrToken} onChange={(e) => this.changeValue('dlvrToken', e)} />
-        </FormGroup>
-        <FormGroup className={classes.formGroup}>
-          <TextField label="Management token" margin="normal" placeholder="Management Token" value={mgmtToken} onChange={(e) => this.changeValue('mgmtToken', e)} />
-        </FormGroup>
-        <FormGroup className={classes.formGroup}>
-          <FormControlLabel
-              control={<Switch
-                checked={this.state.devMode}
-                onChange={this.handleChange('devMode')}
-                aria-label="Dev-mode"
-              />}
-              label="Dev mode (ids)"/>
-          <FormControlLabel
-              control={<Switch
-                checked={this.state.hideFields}
-                onChange={this.handleChange('hideFields')}
-                aria-label="Hide-fields"
-              />}
-              label="Hide fields"/>
-        </FormGroup>
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button color="primary" onClick={this.handleRequestClose}>
-        OK
-      </Button>
-    </DialogActions>
-  </Dialog>
+    return (
+    <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+      <DialogTitle>Contentful auth tokens</DialogTitle>
+        <DialogContent>
+        <DialogContentText>
+          <FormGroup className={classes.formGroup}>
+            <TextField label="spaceId" margin="normal" placeholder="SpaceId" value={spaceId} onChange={(e) => this.changeValue('spaceId', e)} />
+          </FormGroup>
+          <FormGroup className={classes.formGroup}>
+            <TextField label="Delivery token" margin="normal" placeholder="Delivery Token" value={dlvrToken} onChange={(e) => this.changeValue('dlvrToken', e)} />
+          </FormGroup>
+          <FormGroup className={classes.formGroup}>
+            <TextField label="Management token" margin="normal" placeholder="Management Token" value={mgmtToken} onChange={(e) => this.changeValue('mgmtToken', e)} />
+          </FormGroup>
+          <FormGroup className={classes.formGroup}>
+            <FormControlLabel
+                control={<Switch
+                  checked={this.state.devMode}
+                  onChange={this.handleChange('devMode')}
+                  aria-label="Dev-mode"
+                />}
+                label="Dev mode (ids)"/>
+            <FormControlLabel
+                control={<Switch
+                  checked={this.state.hideFields}
+                  onChange={this.handleChange('hideFields')}
+                  aria-label="Hide-fields"
+                />}
+                label="Hide fields"/>
+          </FormGroup>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button color="primary" onClick={this.handleRequestClose}>
+          OK
+        </Button>
+      </DialogActions>
+    </Dialog>
+    )
   }
 
   renderBlankScreen() {
@@ -222,7 +229,7 @@ class Index extends Component {
       <Typography type="subheading" gutterBottom>
 
       </Typography>
-      <Button raised color="accent" onClick={this.handleClick}>
+      <Button variant="contained" color="primary" onClick={this.handleClick}>
         Set contentful tokens
       </Button>
     </div>
@@ -237,11 +244,11 @@ class Index extends Component {
       <Typography type="title" color="inherit" className={classes.flex}>
         Contentful model graph
       </Typography>
-      {this.hasCredentials && <Button color="contrast" aria-label="reload" className={classes.button} onClick={() => this.handleRender()}>
+      {this.hasCredentials && <Button color="secondary" variant="contained" aria-label="reload" className={classes.button} onClick={() => this.handleRender()}>
         <RefreshIcon /> Refresh
       </Button>}
 
-      {<Button color="contrast" onClick={this.handleClick}>
+      {<Button color="secondary" variant="contained" onClick={this.handleClick}>
         <SettingsIcon className={classes.icon} />
         Settings
       </Button>}

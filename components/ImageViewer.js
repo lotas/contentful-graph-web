@@ -27,7 +27,7 @@ class ImageViewer extends React.Component {
   }
 }
 
-ImageViewer.PropTypes = {
+ImageViewer.propTypes = {
   img: PropTypes.string
 }
 
