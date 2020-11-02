@@ -15,7 +15,7 @@
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
     "body-parser": "^1.18.3",
-    "contentful-graph": "^1.5.2",
+    "contentful-graph": "^1.5.3",
     "express": "^4.16.4",
     "jss": "^9.8.7",
     "jss-preset-default": "^4.5.0",
