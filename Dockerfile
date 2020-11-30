@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:14-alpine
 
 RUN apk add --update graphviz font-bitstream-type1 ghostscript-fonts git && \
   rm -rf /var/cache/apk/*
