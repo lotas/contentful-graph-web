@@ -6,7 +6,7 @@ const convertApi = require('contentful-graph');
 const outFile = (fileName, format) => path.join(__dirname, './../static/graphs/', `${fileName}.${format}`)
 
 const renderHandler = async (req, res) => {
-  const { spaceId, dlvrToken, mgmtToken, devMode = false, hideFields = false } = req.body
+  const { spaceId, dlvrToken, mgmtToken, devMode = false, hideFields = false, environmentId = 'master' } = req.body
 
   if (!spaceId) {
     return res.json({ error: 'Missing spaceId' })
@@ -19,8 +19,8 @@ const renderHandler = async (req, res) => {
 
   try {
     contentTypes = mgmtToken
-      ? await convertApi.getContentTypesFromManagementApi(spaceId, mgmtToken)
-      : await convertApi.getContentTypesFromDistributionApi(spaceId, dlvrToken)
+      ? await convertApi.getContentTypesFromManagementApi(spaceId, mgmtToken, environmentId)
+      : await convertApi.getContentTypesFromDistributionApi(spaceId, dlvrToken, environmentId)
   } catch (err) {
     return res.json({ error: err })
   }

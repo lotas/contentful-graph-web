@@ -104,6 +104,7 @@ class Index extends Component {
         spaceId: '',
         mgmtToken: '',
         dlvrToken: '',
+        environmentId: 'master',
         devMode: false,
         hideFields: false,
         data: null
@@ -114,8 +115,8 @@ class Index extends Component {
   }
 
   get hasCredentials() {
-    const { spaceId, dlvrToken, mgmtToken } = this.state
-    return spaceId && (dlvrToken || mgmtToken)
+    const { spaceId, dlvrToken, mgmtToken, environmentId } = this.state
+    return spaceId && environmentId && (dlvrToken || mgmtToken)
   }
 
   handleRequestClose = () => {
@@ -141,14 +142,14 @@ class Index extends Component {
       rendering: true
     })
 
-    const { spaceId, dlvrToken, mgmtToken, devMode, hideFields } = this.state
+    const { spaceId, dlvrToken, mgmtToken, devMode, hideFields, environmentId } = this.state
 
     fetch('/render', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ spaceId, dlvrToken, mgmtToken, devMode, hideFields })
+      body: JSON.stringify({ spaceId, dlvrToken, mgmtToken, devMode, hideFields, environmentId })
     })
       .then(res => res.json())
       .then(data => {
@@ -178,7 +179,7 @@ class Index extends Component {
 
   renderDialog() {
     const { classes } = this.props
-    const { spaceId, dlvrToken, mgmtToken } = this.state
+    const { spaceId, dlvrToken, mgmtToken, environmentId } = this.state
 
     return (
     <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
@@ -187,6 +188,9 @@ class Index extends Component {
         <DialogContentText>
           <FormGroup className={classes.formGroup}>
             <TextField label="spaceId" margin="normal" placeholder="SpaceId" value={spaceId} onChange={(e) => this.changeValue('spaceId', e)} />
+          </FormGroup>
+          <FormGroup className={classes.formGroup}>
+            <TextField label="environmentId" margin="normal" placeholder="EnvironmentId" value={environmentId} onChange={(e) => this.changeValue('environmentId', e)} />
           </FormGroup>
           <FormGroup className={classes.formGroup}>
             <TextField label="Delivery token" margin="normal" placeholder="Delivery Token" value={dlvrToken} onChange={(e) => this.changeValue('dlvrToken', e)} />
