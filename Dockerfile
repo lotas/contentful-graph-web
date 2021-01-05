@@ -1,6 +1,6 @@
 FROM node:14-alpine
 
-RUN apk add --update graphviz font-bitstream-type1 ghostscript-fonts git && \
+RUN apk add --update graphviz font-bitstream-type1 ghostscript-fonts ttf-freefont git && \
   rm -rf /var/cache/apk/*
 
 ADD package.json /tmp/package.json

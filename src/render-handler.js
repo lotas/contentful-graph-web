@@ -33,6 +33,7 @@ const renderHandler = async (req, res) => {
   if (dotStr && dotStr.length > 1) {
     // wait for the png
     await generateGraph(outFile(fileName, 'png'), dotStr, 'png')
+    fs.writeFile(outFile(fileName, 'dot'), dotStr, (err, res) => console.log(err, res))
 
     // but those are fine to be finished later
     setImmediate(() => generateGraph(outFile(fileName, 'svg'), dotStr, 'svg'))
