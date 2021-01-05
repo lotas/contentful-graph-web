@@ -224,7 +224,7 @@ class Index extends Component {
   renderBlankScreen() {
     return <div>
       <Typography type="display1" gutterBottom>
-        Contenful model graph
+        Contentful model graph
       </Typography>
       <Typography type="subheading" gutterBottom>
 
