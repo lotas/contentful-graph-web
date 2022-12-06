@@ -14,9 +14,9 @@
   "dependencies": {
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "contentful-graph": "^1.6.0",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "jss": "^9.8.7",
     "jss-preset-default": "^4.5.0",
     "next": "^7.0.2",
